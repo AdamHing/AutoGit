@@ -1,6 +1,4 @@
 import ollama
-import os
-
 import subprocess
 import re
 
@@ -15,7 +13,7 @@ def get_git_diff():
 print(get_git_diff())
 print("============================================================")
 
-def chat():
+def generate_commit_msg():
     diff = get_git_diff()
     response = ollama.chat(model='deepseek-r1:8b',messages=[
         {
@@ -29,13 +27,8 @@ def chat():
     ])
 
     return response['message']['content']
-#print(chat())
 
 
-
-# current_file = open(os.path.basename(__file__),'r')
-# current_file = current_file.read()
-
-response=chat()
+response=generate_commit_msg()
 response = re.sub(r"<think>.*?</think>", "", response, flags=re.DOTALL).strip()
 print(response)
