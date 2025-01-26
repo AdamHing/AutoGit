@@ -33,9 +33,8 @@ def chat():
 
 
 
-current_file = open(os.path.basename(__file__),'r')
-current_file = current_file.read()
-print(current_file)
+# current_file = open(os.path.basename(__file__),'r')
+# current_file = current_file.read()
 
 response=chat()
 response = re.sub(r"<think>.*?</think>", "", response, flags=re.DOTALL).strip()
