@@ -70,7 +70,7 @@ print(get_git_diff()) # diff
 print("============================================================")
 
 response=generate_commit_msg() # get commit message
-print(response)
+print("commit message: ",response)
 repo.index.commit(response) # git commmit -m ""
 
 repo.remote(name='origin').push() # git push
