@@ -44,6 +44,9 @@ repo.index.commit(response) # git commmit -m ""
 repo.remote(name='origin').push() # git push
 log = repo.git.log() #git log
 
+print(log)
+
+
 
 # call back
 # program sits in the repo 
