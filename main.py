@@ -51,4 +51,4 @@ print(log)
 
 # automate the process every x minutes
 
-# 
+print("testing")
