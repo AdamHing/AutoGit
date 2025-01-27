@@ -37,7 +37,11 @@ response=generate_commit_msg()
 response = re.sub(r"<think>.*?</think>", "", response, flags=re.DOTALL).strip()
 print(response)
 
-repo.index.commit('Your Commit Message')
+repo.index.commit(response)
+
+
+origin = repo.remote(name='origin')
+origin.push()
 
 #generate git log
 
