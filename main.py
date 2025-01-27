@@ -19,18 +19,23 @@ print("============================================================")
 
 def generate_commit_msg():
     diff = get_git_diff()
-    response = ollama.chat(model='deepseek-r1:8b',messages=[
-        {
-            'role': 'system',
-            'content': "Generate a git commit message based on the change log of the file. Respond with ONLY the message. 20 words maximum."
-        },
-        {
-            'role': 'user',
-            'content': f"Generate a commit message for this diff:\n\n{diff}"
-        }
-    ])
+    
+    if diff != "No staged changes found.":
+        response = ollama.chat(model='deepseek-r1:8b',messages=[
+            {
+                'role': 'system',
+                'content': "Generate a git commit message based on the change log of the file. Respond with ONLY the message. 20 words maximum."
+            },
+            {
+                'role': 'user',
+                'content': f"Generate a commit message for this diff:\n\n{diff}"
+            }
+        ])
 
-    return response['message']['content']
+        return response['message']['content']
+    
+    else:
+        return "updated nothing."
 
 
 response=generate_commit_msg()
@@ -44,11 +49,3 @@ origin = repo.remote(name='origin')
 origin.push()
 log = repo.git.log()
 print(log)
-#generate git log
-
-# git push
-# git add
-
-# automate the process every x minutes
-
-print("testing")
