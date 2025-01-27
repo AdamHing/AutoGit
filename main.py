@@ -1,6 +1,12 @@
 import ollama
 import subprocess
 import re
+import git
+
+
+
+repo =git.Repo("D:\Coding\Projects\AutoGit")
+repo.index.add(['main.py'])
 
 def get_git_diff():
     try:
@@ -31,13 +37,13 @@ response=generate_commit_msg()
 response = re.sub(r"<think>.*?</think>", "", response, flags=re.DOTALL).strip()
 print(response)
 
-
+repo.index.commit('Your Commit Message')
 
 #generate git log
 
 # git push
 # git add
 
-# auto adding 
+# automate the process every x minutes
 
 # 
