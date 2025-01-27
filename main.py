@@ -28,8 +28,7 @@ def get_git_diff():
     except subprocess.CalledProcessError:
         return "No staged changes found."
 
-print(get_git_diff())
-print("============================================================")
+
 
 def generate_commit_msg():
     
@@ -47,32 +46,39 @@ def generate_commit_msg():
                 'content': f"Generate a commit message for this diff:\n\n{diff}"
             }
         ])
-        return response['message']['content']
+        return re.sub(r"<think>.*?</think>", "", response['message']['content'], flags=re.DOTALL).strip()
     
     else:
         return "updated nothing."
     
     
     
-    
+
+
     
 cwd = os.getcwd()
 print('cwd',cwd)
 
-repo = "D:\Coding\Projects\AutoGit"
+repo_path = "D:\Coding\Projects\AutoGit"
 files_to_add = ['main.py']
 
-repo = git.Repo()
-repo.index.add(files_to_add)
+repo = git.Repo() 
 
-response=generate_commit_msg()
-response = re.sub(r"<think>.*?</think>", "", response, flags=re.DOTALL).strip()
+repo.index.add(files_to_add) # git add
+
+print(get_git_diff()) # diff
+print("============================================================")
+
+response=generate_commit_msg() # get commit message
 print(response)
+repo.index.commit(response) # git commmit -m ""
 
-repo.index.commit(response)
-origin = repo.remote(name='origin')
-origin.push()
-log = repo.git.log()
+repo.remote(name='origin').push() # git push
+log = repo.git.log() #git log
+
+
+
+
 print(log)
     
 
