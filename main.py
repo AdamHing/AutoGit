@@ -42,7 +42,8 @@ repo.index.commit(response)
 
 origin = repo.remote(name='origin')
 origin.push()
-
+log = repo.git.log()
+print(log)
 #generate git log
 
 # git push
