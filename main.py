@@ -24,7 +24,7 @@ def generate_commit_msg():
         response = ollama.chat(model='deepseek-r1:8b',messages=[
             {
                 'role': 'system',
-                'content': "Generate a git commit message based on the change log of the file. Respond with ONLY the message. 20 words maximum."
+                'content': "Generate a git commit message based on the change log of the file. Respond with ONLY the message. 30 words maximum."
             },
             {
                 'role': 'user',
