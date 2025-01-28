@@ -32,7 +32,6 @@ def generate_commit_msg():
     
     
     
-#test thing
 
 repo = git.Repo() 
 
