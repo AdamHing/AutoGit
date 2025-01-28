@@ -11,12 +11,10 @@ def get_git_diff():
 
 
 def generate_commit_msg():
-    
-    
     diff = get_git_diff()
     
     if diff != "No staged changes found.":
-        response = ollama.chat(model='deepseek-r1:1.5b',messages=[
+        response = ollama.chat(model='deepseek-r1:8b',messages=[
              {
             'role': 'system',
             'content': 'You are a helpful assistant tasked with creating concise and meaningful Git commit messages. Your responses must fit within 15 words and describe the exact nature and purpose of the code changes.'
